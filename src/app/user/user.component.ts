@@ -13,7 +13,8 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './user.component.scss',
 })
 export class UserComponent {
-  dialog = inject(MatDialog);
+  // dialog = inject(MatDialog);
+  constructor(public dialog : MatDialog){}
   openDialog() {
     this.dialog.open(DialogAddUserComponent);
   }
