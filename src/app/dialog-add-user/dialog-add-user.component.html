@@ -4,13 +4,13 @@
   <div>
     <mat-form-field class="mg-16" appearance="outline">
       <mat-label>First name</mat-label>
-      <input matInput placeholder="Placeholder">
+      <input [(ngModel)]="user.firstName" matInput placeholder="Placeholder">
       <!-- <mat-hint>please enter your name</mat-hint> -->
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Last name</mat-label>
-      <input matInput placeholder="Placeholder">
+      <input [(ngModel)]="user.lastName" matInput placeholder="Placeholder">
       <!-- <mat-hint>please enter your name</mat-hint> -->
     </mat-form-field>
   </div>
@@ -18,7 +18,7 @@
   <div>
     <mat-form-field class="width-100" appearance="outline">
       <mat-label>Birth date</mat-label>
-      <input matInput [matDatepicker]="datepicker" />
+      <input [(ngModel)]="birthDate" matInput [matDatepicker]="datepicker" />
       <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
       <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
       <mat-datepicker #datepicker>
@@ -33,7 +33,7 @@
   <div>
     <mat-form-field class="width-100" appearance="outline">
       <mat-label>Street + House No.</mat-label>
-      <input matInput placeholder="Placeholder">
+      <input [(ngModel)]="user.street" matInput placeholder="Placeholder">
       <!-- <mat-hint>please enter your name</mat-hint> -->
     </mat-form-field>
   </div>
@@ -41,13 +41,13 @@
   <div>
     <mat-form-field class="mg-16" appearance="outline">
       <mat-label>Zip code</mat-label>
-      <input matInput placeholder="Placeholder">
+      <input [(ngModel)]="user.zipCode" matInput placeholder="Placeholder">
       <!-- <mat-hint>please enter your name</mat-hint> -->
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>City</mat-label>
-      <input matInput placeholder="Placeholder">
+      <input [(ngModel)]="user.city" matInput placeholder="Placeholder">
       <!-- <mat-hint>please enter your name</mat-hint> -->
     </mat-form-field>
   </div>
@@ -56,5 +56,5 @@
 
 <mat-dialog-actions align ="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button color="primary" [mat-dialog-close]="true">Save</button>
+  <button mat-button color="primary" (click)="saveUser()">Save</button>
 </mat-dialog-actions>
