@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { User } from '../../models/user.class';
 import { FormsModule } from '@angular/forms';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -19,6 +20,7 @@ import { Firestore, collection, addDoc } from '@angular/fire/firestore';
     MatDatepickerModule,
     MatButtonModule,
     FormsModule,
+    MatProgressBarModule
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './dialog-add-user.component.html',
@@ -27,20 +29,20 @@ import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 
 export class DialogAddUserComponent {
   user: User = new User();
-  birthDate: Date | undefined;
+  birthDate!: Date;
+  loading = false;
 
   constructor(private firestore: Firestore) {
     this.firestore = firestore;
   }
   saveUser() {
-    if (this.birthDate) {
       this.user.birthDate = this.birthDate.getTime();
-    }
-
+      this.loading = true;
     const usersCollection = collection(this.firestore, 'users');
     addDoc(usersCollection, this.user.toJSON())
       .then((result: any) => {
         console.log('Added user to Firestore', result);
+        this.loading = false;
       })
       .catch((error) => {
         console.error('Error adding user to Firestore', error);
