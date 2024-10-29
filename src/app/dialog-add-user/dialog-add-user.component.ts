@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -32,7 +32,7 @@ export class DialogAddUserComponent {
   birthDate!: Date;
   loading = false;
 
-  constructor(private firestore: Firestore) {
+  constructor(private firestore: Firestore, public dialogRef: MatDialogRef<DialogAddUserComponent>) {
     this.firestore = firestore;
   }
   saveUser() {
@@ -43,6 +43,7 @@ export class DialogAddUserComponent {
       .then((result: any) => {
         console.log('Added user to Firestore', result);
         this.loading = false;
+        this.dialogRef.close();
       })
       .catch((error) => {
         console.error('Error adding user to Firestore', error);
